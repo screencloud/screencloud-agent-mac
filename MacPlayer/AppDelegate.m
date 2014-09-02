@@ -9,13 +9,15 @@
 #import "AppDelegate.h"
 #import "AwakeManager.h"
 #import "PreferencesController.h"
+#import <sys/sysctl.h>
 
-//#import "GCDHttpd.h"
+#import "GCDHttpd.h"
 //#import "GCDAsyncUdpSocket.h"
 
 @implementation AppDelegate {
     GCDAsyncUdpSocket *udpSocket;
     BOOL isRunning;
+    GCDHttpd *httpd;
 }
 
 #define kShowIcon @"showIcon"
@@ -71,7 +73,7 @@
     }
     
     [self setupSocket];
-//    [self startWebServer];
+    [self startWebServer];
     [self setOnlineState];
     
     if ([[NSUserDefaults standardUserDefaults] boolForKey:kShowIcon] == 0) {
@@ -109,11 +111,29 @@
       fromAddress:(NSData *)address
 withFilterContext:(id)filterContext
 {
-    NSLog(@"***********************");
+    NSLog(@"***********************from address %@", address);
     NSString *msg = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     if (msg)
     {
         NSLog(@"msg %@", msg);
+        
+        NSString *responsePayload = @"HTTP/1.1 200 OK\n" \
+        "ST: urn:dial-multiscreen-org:service:dial:1\n" \
+        "HOST: 239.255.255.250:1900\n" \
+        "EXT:\n" \
+        "CACHE-CONTROL: max-age=1800\n" \
+        "LOCATION: http://%@:8000/ssdp/device-desc.xml\n" \
+        "CONFIGID.UPNP.ORG: 7339\n" \
+        "BOOTID.UPNP.ORG: 7339\n" \
+        "USN: uuid:%@\n\n";
+        
+        responsePayload = [NSString stringWithFormat:responsePayload, [self getIPWithNSHost], [self UUIDString]];
+        
+        
+        NSData *d = [[NSString stringWithFormat:responsePayload] dataUsingEncoding:NSUTF8StringEncoding];
+        [udpSocket sendData:d toAddress:address withTimeout:-1 tag:0];
+
+        NSLog(@"responsePayload: %@",responsePayload);
     }
     else
     {
@@ -123,14 +143,30 @@ withFilterContext:(id)filterContext
     //[udpSocket sendData:data toAddress:address withTimeout:-1 tag:0];
 }
 
+-(NSString *)getIPWithNSHost{
+    NSArray *addresses = [[NSHost currentHost] addresses];
+    NSString *stringAddress;
+    for (NSString *anAddress in addresses) {
+        if (![anAddress hasPrefix:@"127"] && [[anAddress componentsSeparatedByString:@"."] count] == 4) {
+            stringAddress = anAddress;
+            break;
+        } else {
+//            stringAddress = @"IPv4 address not available" ;
+            stringAddress = @"127.0.0.1";
+        }
+    }
+    return stringAddress;
+//    NSLog (@"getIPWithNSHost: stringAddress = %@ ",stringAddress);
+}
+
 //- (void)startSSDP
 //{
 //    if (isRunning)
 //    {
 //        // STOP udp echo server
-//        
+//
 //        [udpSocket close];
-//        
+//
 //        NSLog(@"Stopped Udp Echo server");
 //
 //        isRunning = false;
@@ -179,23 +215,68 @@ withFilterContext:(id)filterContext
 //    [udpSocket sendData:data toAddress:address withTimeout:-1 tag:0];
 //}
 
-//- (void)startWebServer
-//{
-//    // Initialize the httpd
-//    httpd = [[GCDHttpd alloc] initWithDispatchQueue:dispatch_get_current_queue()];
-//    httpd.port = 8000;       // Listen on 0.0.0.0:8000
-//    // Router setup
-//    // [httpd addTarget:self action:@selector(deferredIndex:) forMethod:@"GET" role:@"/users/:userid"];
-//    [httpd addTarget:self action:@selector(simpleIndex:) forMethod:@"GET" role:@"/"];
-//    // [httpd serveDirectory:@"/tmp/" forURLPrefix:@"/t/"];    // Static file serving "/t/"
-//    [httpd serveResource:@"screen.png" forRole:@"/icon1024.png"];   // Resource in the main bundle
-//    
-//    [httpd start];
-//}
+- (void)startWebServer
+{
+    // Initialize the httpd
+    httpd = [[GCDHttpd alloc] initWithDispatchQueue:dispatch_get_current_queue()];
+    httpd.port = 8000;       // Listen on 0.0.0.0:8000
+    // Router setup
+    // [httpd addTarget:self action:@selector(deferredIndex:) forMethod:@"GET" role:@"/users/:userid"];
+    [httpd addTarget:self action:@selector(simpleIndex:) forMethod:@"GET" role:@"/"];
+    [httpd addTarget:self action:@selector(deviceIndex:) forMethod:@"GET" role:@"/ssdp/device-desc.xml"];
+    // [httpd serveDirectory:@"/tmp/" forURLPrefix:@"/t/"];    // Static file serving "/t/"
+    [httpd serveResource:@"screen.png" forRole:@"/icon1024.png"];   // Resource in the main bundle
+    
+    [httpd start];
+}
 
-//- (id)simpleIndex:(GCDRequest *)request {
-//    return @"hello";
-//}
+- (id)simpleIndex:(GCDRequest *)request {
+    return @"hello";
+}
+
+- (id)deviceIndex:(GCDRequest *)request
+{
+    
+    NSString *deviceDesc = @"<?xml version=\"1.0\" encoding=\"utf-8\"?>\n" \
+    "    <root xmlns=\"urn:schemas-upnp-org:device-1-0\">\n" \
+    "        <specVersion>\n" \
+    "        <major>1</major>\n" \
+    "        <minor>0</minor>\n" \
+    "        </specVersion>\n" \
+    "        <URLBase>#base#</URLBase>\n" \
+    "        <device>\n" \
+    "            <deviceType>urn:dial-multiscreen-org:device:dial:1</deviceType>\n" \
+    "            <friendlyName>#friendlyname#</friendlyName>\n" \
+    "            <manufacturer>#manufacturer#</manufacturer>\n" \
+    "            <modelName>#modelName#</modelName>\n" \
+    "            <UDN>uuid:#uuid#</UDN>\n" \
+    "            <serviceList>\n" \
+    "                <service>\n" \
+    "                    <serviceType>urn:schemas-upnp-org:service:dial:1</serviceType>\n" \
+    "                    <serviceId>urn:upnp-org:serviceId:dial</serviceId>\n" \
+    "                    <controlURL>/ssdp/notfound</controlURL>\n" \
+    "                    <eventSubURL>/ssdp/notfound</eventSubURL>\n" \
+    "                    <SCPDURL>/ssdp/notfound</SCPDURL>\n" \
+    "                </service>\n" \
+    "            </serviceList>\n" \
+    "        </device>\n" \
+    "    </root>";
+    
+    deviceDesc = [deviceDesc stringByReplacingOccurrencesOfString:@"#friendlyname#" withString:@"Apple Mac book"];
+    deviceDesc = [deviceDesc stringByReplacingOccurrencesOfString:@"#manufacturer#" withString:@"Apple inc."];
+    deviceDesc = [deviceDesc stringByReplacingOccurrencesOfString:@"#modelName#" withString:@"Retina"];
+    deviceDesc = [deviceDesc stringByReplacingOccurrencesOfString:@"#uuid#" withString:[self UUIDString]];
+    deviceDesc = [deviceDesc stringByReplacingOccurrencesOfString:@"#base#" withString:[NSString stringWithFormat:@"http://%@:8000/", [self getIPWithNSHost]]];
+    
+    return deviceDesc;
+}
+                  
+- (NSString*)UUIDString {
+  CFUUIDRef theUUID = CFUUIDCreate(NULL);
+  CFStringRef string = CFUUIDCreateString(NULL, theUUID);
+  CFRelease(theUUID);
+  return (__bridge NSString *)string;
+}
 
 - (void)setOnlineState
 {

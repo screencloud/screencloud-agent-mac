@@ -22,6 +22,16 @@
 		C367C861192362E5004583B5 /* ScreenCloudView.m in Sources */ = {isa = PBXBuildFile; fileRef = C367C860192362E5004583B5 /* ScreenCloudView.m */; };
 		C38894861920C186005021EF /* AwakeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C38894851920C186005021EF /* AwakeManager.m */; };
 		C396A32B19B47FE4002F24EC /* GCDAsyncUdpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = C396A32A19B47FE4002F24EC /* GCDAsyncUdpSocket.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		C396A34219B5FADA002F24EC /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = C396A32F19B5FADA002F24EC /* GCDAsyncSocket.m */; };
+		C396A34319B5FADA002F24EC /* GCDHttpd.m in Sources */ = {isa = PBXBuildFile; fileRef = C396A33119B5FADA002F24EC /* GCDHttpd.m */; };
+		C396A34419B5FADA002F24EC /* GCDMultipart.m in Sources */ = {isa = PBXBuildFile; fileRef = C396A33319B5FADA002F24EC /* GCDMultipart.m */; };
+		C396A34519B5FADA002F24EC /* GCDRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = C396A33519B5FADA002F24EC /* GCDRequest.m */; };
+		C396A34619B5FADA002F24EC /* GCDResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = C396A33719B5FADA002F24EC /* GCDResponse.m */; };
+		C396A34719B5FADA002F24EC /* GCDRouterRole.m in Sources */ = {isa = PBXBuildFile; fileRef = C396A33919B5FADA002F24EC /* GCDRouterRole.m */; };
+		C396A34819B5FADA002F24EC /* NSData+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = C396A33B19B5FADA002F24EC /* NSData+Utils.m */; };
+		C396A34919B5FADA002F24EC /* NSMutableData+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = C396A33D19B5FADA002F24EC /* NSMutableData+Utils.m */; };
+		C396A34A19B5FADA002F24EC /* NSString+QueryString.m in Sources */ = {isa = PBXBuildFile; fileRef = C396A33F19B5FADA002F24EC /* NSString+QueryString.m */; };
+		C396A34B19B5FADA002F24EC /* NSURL+IntactPath.m in Sources */ = {isa = PBXBuildFile; fileRef = C396A34119B5FADA002F24EC /* NSURL+IntactPath.m */; };
 		C397D2941920DBF7002DDCE9 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C397D2931920DBF7002DDCE9 /* IOKit.framework */; };
 		C3D52E55191B981600C387B5 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3D52E54191B981600C387B5 /* Cocoa.framework */; };
 		C3D52E5F191B981600C387B5 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C3D52E5D191B981600C387B5 /* InfoPlist.strings */; };
@@ -75,6 +85,26 @@
 		C38894851920C186005021EF /* AwakeManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AwakeManager.m; sourceTree = "<group>"; };
 		C396A32919B47FE4002F24EC /* GCDAsyncUdpSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDAsyncUdpSocket.h; sourceTree = "<group>"; };
 		C396A32A19B47FE4002F24EC /* GCDAsyncUdpSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncUdpSocket.m; sourceTree = "<group>"; };
+		C396A32E19B5FADA002F24EC /* GCDAsyncSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDAsyncSocket.h; sourceTree = "<group>"; };
+		C396A32F19B5FADA002F24EC /* GCDAsyncSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncSocket.m; sourceTree = "<group>"; };
+		C396A33019B5FADA002F24EC /* GCDHttpd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDHttpd.h; sourceTree = "<group>"; };
+		C396A33119B5FADA002F24EC /* GCDHttpd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDHttpd.m; sourceTree = "<group>"; };
+		C396A33219B5FADA002F24EC /* GCDMultipart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDMultipart.h; sourceTree = "<group>"; };
+		C396A33319B5FADA002F24EC /* GCDMultipart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDMultipart.m; sourceTree = "<group>"; };
+		C396A33419B5FADA002F24EC /* GCDRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDRequest.h; sourceTree = "<group>"; };
+		C396A33519B5FADA002F24EC /* GCDRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDRequest.m; sourceTree = "<group>"; };
+		C396A33619B5FADA002F24EC /* GCDResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDResponse.h; sourceTree = "<group>"; };
+		C396A33719B5FADA002F24EC /* GCDResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDResponse.m; sourceTree = "<group>"; };
+		C396A33819B5FADA002F24EC /* GCDRouterRole.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDRouterRole.h; sourceTree = "<group>"; };
+		C396A33919B5FADA002F24EC /* GCDRouterRole.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDRouterRole.m; sourceTree = "<group>"; };
+		C396A33A19B5FADA002F24EC /* NSData+Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Utils.h"; sourceTree = "<group>"; };
+		C396A33B19B5FADA002F24EC /* NSData+Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+Utils.m"; sourceTree = "<group>"; };
+		C396A33C19B5FADA002F24EC /* NSMutableData+Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableData+Utils.h"; sourceTree = "<group>"; };
+		C396A33D19B5FADA002F24EC /* NSMutableData+Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableData+Utils.m"; sourceTree = "<group>"; };
+		C396A33E19B5FADA002F24EC /* NSString+QueryString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+QueryString.h"; sourceTree = "<group>"; };
+		C396A33F19B5FADA002F24EC /* NSString+QueryString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+QueryString.m"; sourceTree = "<group>"; };
+		C396A34019B5FADA002F24EC /* NSURL+IntactPath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURL+IntactPath.h"; sourceTree = "<group>"; };
+		C396A34119B5FADA002F24EC /* NSURL+IntactPath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURL+IntactPath.m"; sourceTree = "<group>"; };
 		C397D2931920DBF7002DDCE9 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
 		C3D52E51191B981600C387B5 /* MacPlayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MacPlayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C3D52E54191B981600C387B5 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
@@ -159,6 +189,41 @@
 			path = GCD;
 			sourceTree = "<group>";
 		};
+		C396A32C19B5FADA002F24EC /* GCDHttpd */ = {
+			isa = PBXGroup;
+			children = (
+				C396A32D19B5FADA002F24EC /* GCDAsyncSocket */,
+				C396A33019B5FADA002F24EC /* GCDHttpd.h */,
+				C396A33119B5FADA002F24EC /* GCDHttpd.m */,
+				C396A33219B5FADA002F24EC /* GCDMultipart.h */,
+				C396A33319B5FADA002F24EC /* GCDMultipart.m */,
+				C396A33419B5FADA002F24EC /* GCDRequest.h */,
+				C396A33519B5FADA002F24EC /* GCDRequest.m */,
+				C396A33619B5FADA002F24EC /* GCDResponse.h */,
+				C396A33719B5FADA002F24EC /* GCDResponse.m */,
+				C396A33819B5FADA002F24EC /* GCDRouterRole.h */,
+				C396A33919B5FADA002F24EC /* GCDRouterRole.m */,
+				C396A33A19B5FADA002F24EC /* NSData+Utils.h */,
+				C396A33B19B5FADA002F24EC /* NSData+Utils.m */,
+				C396A33C19B5FADA002F24EC /* NSMutableData+Utils.h */,
+				C396A33D19B5FADA002F24EC /* NSMutableData+Utils.m */,
+				C396A33E19B5FADA002F24EC /* NSString+QueryString.h */,
+				C396A33F19B5FADA002F24EC /* NSString+QueryString.m */,
+				C396A34019B5FADA002F24EC /* NSURL+IntactPath.h */,
+				C396A34119B5FADA002F24EC /* NSURL+IntactPath.m */,
+			);
+			path = GCDHttpd;
+			sourceTree = "<group>";
+		};
+		C396A32D19B5FADA002F24EC /* GCDAsyncSocket */ = {
+			isa = PBXGroup;
+			children = (
+				C396A32E19B5FADA002F24EC /* GCDAsyncSocket.h */,
+				C396A32F19B5FADA002F24EC /* GCDAsyncSocket.m */,
+			);
+			path = GCDAsyncSocket;
+			sourceTree = "<group>";
+		};
 		C3D52E48191B981600C387B5 = {
 			isa = PBXGroup;
 			children = (
@@ -205,6 +270,7 @@
 		C3D52E5A191B981600C387B5 /* MacPlayer */ = {
 			isa = PBXGroup;
 			children = (
+				C396A32C19B5FADA002F24EC /* GCDHttpd */,
 				C396A32819B47FE4002F24EC /* GCD */,
 				C338336B192CACC700C3D3DB /* AppIcon.icns */,
 				C338336C192CACC700C3D3DB /* icon1024.png */,
@@ -364,14 +430,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C396A34B19B5FADA002F24EC /* NSURL+IntactPath.m in Sources */,
+				C396A34819B5FADA002F24EC /* NSData+Utils.m in Sources */,
+				C396A34919B5FADA002F24EC /* NSMutableData+Utils.m in Sources */,
 				C3D52E96191BB27C00C387B5 /* PreferencesController.m in Sources */,
 				C3D52E8C191B9ACC00C387B5 /* StatusItemView.m in Sources */,
 				C3D52E68191B981600C387B5 /* AppDelegate.m in Sources */,
+				C396A34619B5FADA002F24EC /* GCDResponse.m in Sources */,
 				C340BE5C191CE71000975377 /* StartAtLoginController.m in Sources */,
 				C396A32B19B47FE4002F24EC /* GCDAsyncUdpSocket.m in Sources */,
 				C3D52E61191B981600C387B5 /* main.m in Sources */,
+				C396A34719B5FADA002F24EC /* GCDRouterRole.m in Sources */,
+				C396A34519B5FADA002F24EC /* GCDRequest.m in Sources */,
+				C396A34A19B5FADA002F24EC /* NSString+QueryString.m in Sources */,
+				C396A34219B5FADA002F24EC /* GCDAsyncSocket.m in Sources */,
 				C38894861920C186005021EF /* AwakeManager.m in Sources */,
+				C396A34419B5FADA002F24EC /* GCDMultipart.m in Sources */,
 				C367C861192362E5004583B5 /* ScreenCloudView.m in Sources */,
+				C396A34319B5FADA002F24EC /* GCDHttpd.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
