@@ -27,6 +27,7 @@
 #define kActiveIcon @"MenuIconActive"
 #define kPreferencesTitle @"Preferences"
 #define kAlwayAwake @"alwayAwake"
+#define kUUID @"uuid"
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
@@ -115,25 +116,27 @@ withFilterContext:(id)filterContext
     NSString *msg = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     if (msg)
     {
-        NSLog(@"msg %@", msg);
+        NSLog(@"=================msg %@", msg);
         
-        NSString *responsePayload = @"HTTP/1.1 200 OK\n" \
-        "ST: urn:dial-multiscreen-org:service:dial:1\n" \
-        "HOST: 239.255.255.250:1900\n" \
-        "EXT:\n" \
-        "CACHE-CONTROL: max-age=1800\n" \
-        "LOCATION: http://%@:8000/ssdp/device-desc.xml\n" \
-        "CONFIGID.UPNP.ORG: 7339\n" \
-        "BOOTID.UPNP.ORG: 7339\n" \
-        "USN: uuid:%@\n\n";
-        
-        responsePayload = [NSString stringWithFormat:responsePayload, [self getIPWithNSHost], [self UUIDString]];
-        
-        
-        NSData *d = [[NSString stringWithFormat:responsePayload] dataUsingEncoding:NSUTF8StringEncoding];
-        [udpSocket sendData:d toAddress:address withTimeout:-1 tag:0];
-
-        NSLog(@"responsePayload: %@",responsePayload);
+        if ([msg rangeOfString:@"M-SEARCH * HTTP/1.1"].location == NSNotFound) {
+            NSLog(@"string does not contain bla");
+        } else {
+            NSString *responsePayload = @"HTTP/1.1 200 OK\n" \
+            "ST: urn:dial-multiscreen-org:service:dial:1\n" \
+            "HOST: 239.255.255.250:1900\n" \
+            "EXT:\n" \
+            "CACHE-CONTROL: max-age=1800\n" \
+            "LOCATION: http://%@:8008/ssdp/device-desc.xml\n" \
+            "CONFIGID.UPNP.ORG: 7339\n" \
+            "BOOTID.UPNP.ORG: 7339\n" \
+            "USN: uuid:%@\n\n";
+            
+            responsePayload = [NSString stringWithFormat:responsePayload, [self getIPWithNSHost], [self UUID]];
+            NSData *d = [responsePayload dataUsingEncoding:NSUTF8StringEncoding];
+            [udpSocket sendData:d toAddress:address withTimeout:-1 tag:0];
+            
+            NSLog(@"responsePayload: %@",responsePayload);
+        }
     }
     else
     {
@@ -219,20 +222,57 @@ withFilterContext:(id)filterContext
 {
     // Initialize the httpd
     httpd = [[GCDHttpd alloc] initWithDispatchQueue:dispatch_get_current_queue()];
-    httpd.port = 8000;       // Listen on 0.0.0.0:8000
+    httpd.port = 8008;       // Listen on 0.0.0.0:8008
     // Router setup
     // [httpd addTarget:self action:@selector(deferredIndex:) forMethod:@"GET" role:@"/users/:userid"];
     [httpd addTarget:self action:@selector(simpleIndex:) forMethod:@"GET" role:@"/"];
     [httpd addTarget:self action:@selector(deviceIndex:) forMethod:@"GET" role:@"/ssdp/device-desc.xml"];
+    [httpd addTarget:self action:@selector(appIndex:) forMethod:@"GET" role:@"/apps"];
+    [httpd addTarget:self action:@selector(screencloudGet:) forMethod:@"GET" role:@"/apps/ScreenCloud"];
+    [httpd addTarget:self action:@selector(screencloudPost:) forMethod:@"POST" role:@"/apps/ScreenCloud"];
     // [httpd serveDirectory:@"/tmp/" forURLPrefix:@"/t/"];    // Static file serving "/t/"
     [httpd serveResource:@"screen.png" forRole:@"/icon1024.png"];   // Resource in the main bundle
     
     [httpd start];
 }
 
+- (id)screencloudGet:(GCDRequest *)request {
+    NSLog(@"******************************WooHoo get commandddd**************************");
+    return @"hello";
+}
+
+- (id)screencloudPost:(GCDRequest *)request {
+    NSLog(@"******************************WooHoo post commandddd**************************");
+    return @"hello";
+}
+
 - (id)simpleIndex:(GCDRequest *)request {
     return @"hello";
 }
+
+- (id)appIndex:(GCDRequest *)request {
+    
+    //    NSString *appInfo = @"";
+    NSString *appInfo = @"<?xml version='1.0' encoding='UTF-8'?>\n" \
+    "    <service xmlns='urn:dial-multiscreen-org:schemas:dial'>\n" \
+    "        <name>%@</name>\n" \
+    "        <options allowStop='true'/>\n" \
+    "        <activity-status xmlns='urn:chrome.google.com:cast'>\n" \
+    "            <description>Legacy</description>\n" \
+    "        </activity-status>\n" \
+    "        <servicedata xmlns='urn:chrome.google.com:cast'>\n" \
+    "            <connectionSvcURL>%@</connectionSvcURL>\n" \
+    "            <protocols>%@</protocols>\n" \
+    "        </servicedata>\n" \
+    "        <state>%@</state>\n" \
+    "        %@\n" \
+    "    </service>";
+    
+    appInfo = [NSString stringWithFormat:appInfo, @"", @"", @"", @"", @""];
+    
+    return appInfo;
+}
+
 
 - (id)deviceIndex:(GCDRequest *)request
 {
@@ -265,17 +305,30 @@ withFilterContext:(id)filterContext
     deviceDesc = [deviceDesc stringByReplacingOccurrencesOfString:@"#friendlyname#" withString:@"Apple Mac book"];
     deviceDesc = [deviceDesc stringByReplacingOccurrencesOfString:@"#manufacturer#" withString:@"Apple inc."];
     deviceDesc = [deviceDesc stringByReplacingOccurrencesOfString:@"#modelName#" withString:@"Retina"];
-    deviceDesc = [deviceDesc stringByReplacingOccurrencesOfString:@"#uuid#" withString:[self UUIDString]];
-    deviceDesc = [deviceDesc stringByReplacingOccurrencesOfString:@"#base#" withString:[NSString stringWithFormat:@"http://%@:8000/", [self getIPWithNSHost]]];
+    deviceDesc = [deviceDesc stringByReplacingOccurrencesOfString:@"#uuid#" withString:[self UUID]];
+    deviceDesc = [deviceDesc stringByReplacingOccurrencesOfString:@"#base#" withString:[NSString stringWithFormat:@"http://%@:8008/apps/", [self getIPWithNSHost]]];
     
     return deviceDesc;
 }
                   
-- (NSString*)UUIDString {
-  CFUUIDRef theUUID = CFUUIDCreate(NULL);
-  CFStringRef string = CFUUIDCreateString(NULL, theUUID);
-  CFRelease(theUUID);
-  return (__bridge NSString *)string;
+- (NSString *)UUID {
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSString *uuid;
+    if ([userDefaults valueForKey:kUUID]){
+        uuid = [userDefaults valueForKey:kUUID];
+    } else {
+        uuid = [self generateUUID];
+        [userDefaults setValue:uuid forKey:kUUID];
+        [userDefaults synchronize];
+    }
+    return uuid;
+}
+
+- (NSString*)generateUUID {
+    CFUUIDRef theUUID = CFUUIDCreate(NULL);
+    CFStringRef string = CFUUIDCreateString(NULL, theUUID);
+    CFRelease(theUUID);
+    return (__bridge NSString *)string;
 }
 
 - (void)setOnlineState
