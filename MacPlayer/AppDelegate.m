@@ -270,7 +270,14 @@ withFilterContext:(id)filterContext
     
     appInfo = [NSString stringWithFormat:appInfo, @"", @"", @"", @"", @""];
     
-    return appInfo;
+    GCDResponse * response = [request responseWithStatus:200 message:appInfo];
+    response.headers[@"Access-Control-Allow-Method"] = @"GET, POST, DELETE, OPTIONS";
+    response.headers[@"Access-Control-Expose-Headers"] = @"Location";
+    response.headers[@"Cache-control"] = @"no-cache, must-revalidate, no-store";
+    response.headers[@"Content-type"] = @"application/xml;charset=utf-8";
+    response.headers[@"Application-URL"] = [NSString stringWithFormat:@"http://%@:8008/apps/", [self getIPWithNSHost]];
+    
+    return response;
 }
 
 
@@ -307,8 +314,13 @@ withFilterContext:(id)filterContext
     deviceDesc = [deviceDesc stringByReplacingOccurrencesOfString:@"#modelName#" withString:@"Retina"];
     deviceDesc = [deviceDesc stringByReplacingOccurrencesOfString:@"#uuid#" withString:[self UUID]];
     deviceDesc = [deviceDesc stringByReplacingOccurrencesOfString:@"#base#" withString:[NSString stringWithFormat:@"http://%@:8008/apps/", [self getIPWithNSHost]]];
-    
-    return deviceDesc;
+
+    GCDResponse * response = [request responseWithStatus:200 message:deviceDesc];
+    response.headers[@"Access-Control-Allow-Method"] = @"GET, POST, DELETE, OPTIONS";
+    response.headers[@"Access-Control-Expose-Headers"] = @"Location";
+    response.headers[@"Content-type"] = @"application/xml";
+    response.headers[@"Application-URL"] = [NSString stringWithFormat:@"http://%@:8008/apps/", [self getIPWithNSHost]];
+    return response;
 }
                   
 - (NSString *)UUID {
