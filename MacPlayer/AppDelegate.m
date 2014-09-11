@@ -73,8 +73,8 @@
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kOnline];
     }
     
-    [self setupSocket];
-    [self startWebServer];
+    //[self setupSocket];
+    //[self startWebServer];
     [self setOnlineState];
     
     if ([[NSUserDefaults standardUserDefaults] boolForKey:kShowIcon] == 0) {
@@ -112,12 +112,9 @@
       fromAddress:(NSData *)address
 withFilterContext:(id)filterContext
 {
-    NSLog(@"***********************from address %@", address);
     NSString *msg = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     if (msg)
     {
-        NSLog(@"=================msg %@", msg);
-        
         if ([msg rangeOfString:@"M-SEARCH * HTTP/1.1"].location == NSNotFound) {
             NSLog(@"string does not contain bla");
         } else {
@@ -131,19 +128,18 @@ withFilterContext:(id)filterContext
             "BOOTID.UPNP.ORG: 7339\n" \
             "USN: uuid:%@\n\n";
             
-            responsePayload = [NSString stringWithFormat:responsePayload, [self getIPWithNSHost], [self UUID]];
-            NSData *d = [responsePayload dataUsingEncoding:NSUTF8StringEncoding];
-            [udpSocket sendData:d toAddress:address withTimeout:-1 tag:0];
-            
-            NSLog(@"responsePayload: %@",responsePayload);
+            @try {
+                responsePayload = [NSString stringWithFormat:responsePayload, [self getIPWithNSHost], [self UUID]];
+                NSData *d = [responsePayload dataUsingEncoding:NSUTF8StringEncoding];
+                [udpSocket sendData:d toAddress:address withTimeout:-1 tag:0];
+            }
+            @catch ( NSException *e ) {}
         }
     }
     else
     {
         NSLog(@"Error converting received data into UTF-8 String");
     }
-    
-    //[udpSocket sendData:data toAddress:address withTimeout:-1 tag:0];
 }
 
 -(NSString *)getIPWithNSHost{
@@ -154,69 +150,12 @@ withFilterContext:(id)filterContext
             stringAddress = anAddress;
             break;
         } else {
-//            stringAddress = @"IPv4 address not available" ;
+            // stringAddress = @"IPv4 address not available" ;
             stringAddress = @"127.0.0.1";
         }
     }
     return stringAddress;
-//    NSLog (@"getIPWithNSHost: stringAddress = %@ ",stringAddress);
 }
-
-//- (void)startSSDP
-//{
-//    if (isRunning)
-//    {
-//        // STOP udp echo server
-//
-//        [udpSocket close];
-//
-//        NSLog(@"Stopped Udp Echo server");
-//
-//        isRunning = false;
-//    }
-//    else
-//    {
-//        // START udp echo server
-//        
-//        int port = 9100;
-//        
-//        NSError *error = nil;
-//        
-//        if (![udpSocket bindToPort:port error:&error])
-//        {
-//            NSLog(@"Error starting server (bind): %@", error);
-//            return;
-//        }
-//        if (![udpSocket beginReceiving:&error])
-//        {
-//            [udpSocket close];
-//            
-//            NSLog(@"Error starting server (recv): %@", error);
-//            return;
-//        }
-//        
-//        NSLog(@"Udp Echo server started on port %hu", [udpSocket localPort]);
-//        isRunning = YES;
-//        NSLog(@"Started");
-//    }
-//}
-//
-//- (void)udpSocket:(GCDAsyncUdpSocket *)sock didReceiveData:(NSData *)data
-//      fromAddress:(NSData *)address
-//withFilterContext:(id)filterContext
-//{
-//    NSString *msg = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-//    if (msg)
-//    {
-//        NSLog(@"msg %@", msg);
-//    }
-//    else
-//    {
-//        NSLog(@"Error converting received data into UTF-8 String");
-//    }
-//    
-//    [udpSocket sendData:data toAddress:address withTimeout:-1 tag:0];
-//}
 
 - (void)startWebServer
 {
@@ -237,13 +176,27 @@ withFilterContext:(id)filterContext
 }
 
 - (id)screencloudGet:(GCDRequest *)request {
-    NSLog(@"******************************WooHoo get commandddd**************************");
-    return @"hello";
+    return @"";
 }
 
 - (id)screencloudPost:(GCDRequest *)request {
-    NSLog(@"******************************WooHoo post commandddd**************************");
-    return @"hello";
+    NSString* commandObj = [[NSString alloc] initWithData:request.rawData encoding:NSUTF8StringEncoding];
+    NSLog(@"message %@", commandObj);
+    
+    NSData *jsonData = [commandObj dataUsingEncoding:NSUTF8StringEncoding];
+    NSError *e;
+    NSDictionary *commandDict = [NSJSONSerialization JSONObjectWithData:jsonData options:nil error:&e];
+    if (commandDict) {
+        if ([commandDict[@"command"] isEqualToString:@"open_url"]) {    
+            NSString *url = commandDict[@"url"];
+            NSURLRequest *request = [NSURLRequest requestWithURL:
+                                     [NSURL URLWithString:url]];
+            [self.screenView.mainFrame loadRequest:request];
+        }
+    } else {
+        NSLog(@"do have dict");
+    }
+    return @"";
 }
 
 - (id)simpleIndex:(GCDRequest *)request {
