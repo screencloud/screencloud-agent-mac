@@ -59,27 +59,25 @@
 }
 
 - (void)awakeFromNib
-{
-	statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength: 22.0];
-    
+{    
+	statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength: 24.0];
 	statusView = [[StatusItemView alloc] initWithStatusItem: statusItem];
 	[statusView setMenu: statusMenux];
-    [statusView setImage: [NSImage imageNamed:kIcon]];
-    [statusView setAlternateImage: [NSImage imageNamed:kActiveIcon]];
-    
+    [statusView setImage: [NSImage imageNamed:@"Status"]];
+    [statusView setAlternateImage: [NSImage imageNamed:@"StatusHighlighted"]];
     [statusItem setView: statusView];
     
     if ([[NSUserDefaults standardUserDefaults] boolForKey:kOnline] == 0) {
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kOnline];
     }
     
-    //[self setupSocket];
-    //[self startWebServer];
+    [self setupSocket];
+    [self startWebServer];
     [self setOnlineState];
     
-    if ([[NSUserDefaults standardUserDefaults] boolForKey:kShowIcon] == 0) {
-        [statusView setHidden:YES];
-    }
+//    if ([[NSUserDefaults standardUserDefaults] boolForKey:kShowIcon] == 0) {
+//        [statusView setHidden:YES];
+//    }
 }
 
 - (void)dealloc
@@ -115,9 +113,7 @@ withFilterContext:(id)filterContext
     NSString *msg = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     if (msg)
     {
-        if ([msg rangeOfString:@"M-SEARCH * HTTP/1.1"].location == NSNotFound) {
-            NSLog(@"string does not contain bla");
-        } else {
+        if (!([msg rangeOfString:@"M-SEARCH * HTTP/1.1"].location == NSNotFound)) {
             NSString *responsePayload = @"HTTP/1.1 200 OK\n" \
             "ST: urn:dial-multiscreen-org:service:dial:1\n" \
             "HOST: 239.255.255.250:1900\n" \
@@ -133,7 +129,9 @@ withFilterContext:(id)filterContext
                 NSData *d = [responsePayload dataUsingEncoding:NSUTF8StringEncoding];
                 [udpSocket sendData:d toAddress:address withTimeout:-1 tag:0];
             }
-            @catch ( NSException *e ) {}
+            @catch ( NSException *e ) {
+                NSLog(@"error %@", e);
+            }
         }
     }
     else
@@ -262,7 +260,7 @@ withFilterContext:(id)filterContext
     "        </device>\n" \
     "    </root>";
     
-    deviceDesc = [deviceDesc stringByReplacingOccurrencesOfString:@"#friendlyname#" withString:@"Apple Mac book"];
+    deviceDesc = [deviceDesc stringByReplacingOccurrencesOfString:@"#friendlyname#" withString:@"Mac agent"];
     deviceDesc = [deviceDesc stringByReplacingOccurrencesOfString:@"#manufacturer#" withString:@"Apple inc."];
     deviceDesc = [deviceDesc stringByReplacingOccurrencesOfString:@"#modelName#" withString:@"Retina"];
     deviceDesc = [deviceDesc stringByReplacingOccurrencesOfString:@"#uuid#" withString:[self UUID]];

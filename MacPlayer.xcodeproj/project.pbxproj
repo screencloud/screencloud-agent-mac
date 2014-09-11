@@ -21,7 +21,6 @@
 		C340BF46191CF48700975377 /* MacPlayerHelper.app in CopyFiles */ = {isa = PBXBuildFile; fileRef = C340BF19191CF3BB00975377 /* MacPlayerHelper.app */; };
 		C367C861192362E5004583B5 /* ScreenCloudView.m in Sources */ = {isa = PBXBuildFile; fileRef = C367C860192362E5004583B5 /* ScreenCloudView.m */; };
 		C38894861920C186005021EF /* AwakeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C38894851920C186005021EF /* AwakeManager.m */; };
-		C396A32B19B47FE4002F24EC /* GCDAsyncUdpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = C396A32A19B47FE4002F24EC /* GCDAsyncUdpSocket.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		C396A34219B5FADA002F24EC /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = C396A32F19B5FADA002F24EC /* GCDAsyncSocket.m */; };
 		C396A34319B5FADA002F24EC /* GCDHttpd.m in Sources */ = {isa = PBXBuildFile; fileRef = C396A33119B5FADA002F24EC /* GCDHttpd.m */; };
 		C396A34419B5FADA002F24EC /* GCDMultipart.m in Sources */ = {isa = PBXBuildFile; fileRef = C396A33319B5FADA002F24EC /* GCDMultipart.m */; };
@@ -33,6 +32,11 @@
 		C396A34A19B5FADA002F24EC /* NSString+QueryString.m in Sources */ = {isa = PBXBuildFile; fileRef = C396A33F19B5FADA002F24EC /* NSString+QueryString.m */; };
 		C396A34B19B5FADA002F24EC /* NSURL+IntactPath.m in Sources */ = {isa = PBXBuildFile; fileRef = C396A34119B5FADA002F24EC /* NSURL+IntactPath.m */; };
 		C397D2941920DBF7002DDCE9 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C397D2931920DBF7002DDCE9 /* IOKit.framework */; };
+		C3C213C019C1D9A5006C3A1B /* Status.png in Resources */ = {isa = PBXBuildFile; fileRef = C3C213BC19C1D9A5006C3A1B /* Status.png */; };
+		C3C213C119C1D9A5006C3A1B /* Status@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C3C213BD19C1D9A5006C3A1B /* Status@2x.png */; };
+		C3C213C219C1D9A5006C3A1B /* StatusHighlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = C3C213BE19C1D9A5006C3A1B /* StatusHighlighted.png */; };
+		C3C213C319C1D9A5006C3A1B /* StatusHighlighted@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C3C213BF19C1D9A5006C3A1B /* StatusHighlighted@2x.png */; };
+		C3C213C619C1E352006C3A1B /* GCDAsyncUdpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = C3C213C519C1E352006C3A1B /* GCDAsyncUdpSocket.m */; };
 		C3D52E55191B981600C387B5 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3D52E54191B981600C387B5 /* Cocoa.framework */; };
 		C3D52E5F191B981600C387B5 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C3D52E5D191B981600C387B5 /* InfoPlist.strings */; };
 		C3D52E61191B981600C387B5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C3D52E60191B981600C387B5 /* main.m */; };
@@ -83,8 +87,6 @@
 		C367C860192362E5004583B5 /* ScreenCloudView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScreenCloudView.m; sourceTree = "<group>"; };
 		C38894841920C186005021EF /* AwakeManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AwakeManager.h; sourceTree = "<group>"; };
 		C38894851920C186005021EF /* AwakeManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AwakeManager.m; sourceTree = "<group>"; };
-		C396A32919B47FE4002F24EC /* GCDAsyncUdpSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDAsyncUdpSocket.h; sourceTree = "<group>"; };
-		C396A32A19B47FE4002F24EC /* GCDAsyncUdpSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncUdpSocket.m; sourceTree = "<group>"; };
 		C396A32E19B5FADA002F24EC /* GCDAsyncSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDAsyncSocket.h; sourceTree = "<group>"; };
 		C396A32F19B5FADA002F24EC /* GCDAsyncSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncSocket.m; sourceTree = "<group>"; };
 		C396A33019B5FADA002F24EC /* GCDHttpd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDHttpd.h; sourceTree = "<group>"; };
@@ -106,6 +108,12 @@
 		C396A34019B5FADA002F24EC /* NSURL+IntactPath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURL+IntactPath.h"; sourceTree = "<group>"; };
 		C396A34119B5FADA002F24EC /* NSURL+IntactPath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURL+IntactPath.m"; sourceTree = "<group>"; };
 		C397D2931920DBF7002DDCE9 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
+		C3C213BC19C1D9A5006C3A1B /* Status.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Status.png; sourceTree = "<group>"; };
+		C3C213BD19C1D9A5006C3A1B /* Status@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Status@2x.png"; sourceTree = "<group>"; };
+		C3C213BE19C1D9A5006C3A1B /* StatusHighlighted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = StatusHighlighted.png; sourceTree = "<group>"; };
+		C3C213BF19C1D9A5006C3A1B /* StatusHighlighted@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "StatusHighlighted@2x.png"; sourceTree = "<group>"; };
+		C3C213C419C1E352006C3A1B /* GCDAsyncUdpSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDAsyncUdpSocket.h; sourceTree = "<group>"; };
+		C3C213C519C1E352006C3A1B /* GCDAsyncUdpSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncUdpSocket.m; sourceTree = "<group>"; };
 		C3D52E51191B981600C387B5 /* MacPlayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MacPlayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C3D52E54191B981600C387B5 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		C3D52E57191B981600C387B5 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -183,8 +191,8 @@
 		C396A32819B47FE4002F24EC /* GCD */ = {
 			isa = PBXGroup;
 			children = (
-				C396A32919B47FE4002F24EC /* GCDAsyncUdpSocket.h */,
-				C396A32A19B47FE4002F24EC /* GCDAsyncUdpSocket.m */,
+				C3C213C419C1E352006C3A1B /* GCDAsyncUdpSocket.h */,
+				C3C213C519C1E352006C3A1B /* GCDAsyncUdpSocket.m */,
 			);
 			path = GCD;
 			sourceTree = "<group>";
@@ -270,6 +278,10 @@
 		C3D52E5A191B981600C387B5 /* MacPlayer */ = {
 			isa = PBXGroup;
 			children = (
+				C3C213BC19C1D9A5006C3A1B /* Status.png */,
+				C3C213BD19C1D9A5006C3A1B /* Status@2x.png */,
+				C3C213BE19C1D9A5006C3A1B /* StatusHighlighted.png */,
+				C3C213BF19C1D9A5006C3A1B /* StatusHighlighted@2x.png */,
 				C396A32C19B5FADA002F24EC /* GCDHttpd */,
 				C396A32819B47FE4002F24EC /* GCD */,
 				C338336B192CACC700C3D3DB /* AppIcon.icns */,
@@ -405,10 +417,14 @@
 				C3D52E93191BB25400C387B5 /* Preferences.xib in Resources */,
 				C338336D192CACC700C3D3DB /* AppIcon.icns in Resources */,
 				C3F5F7B4192388DB00E8AD90 /* MenuIcon@2x.png in Resources */,
+				C3C213C019C1D9A5006C3A1B /* Status.png in Resources */,
 				C3D52E5F191B981600C387B5 /* InfoPlist.strings in Resources */,
 				C338336E192CACC700C3D3DB /* icon1024.png in Resources */,
 				C3D52E6D191B981600C387B5 /* Images.xcassets in Resources */,
 				C3D52E65191B981600C387B5 /* Credits.rtf in Resources */,
+				C3C213C119C1D9A5006C3A1B /* Status@2x.png in Resources */,
+				C3C213C319C1D9A5006C3A1B /* StatusHighlighted@2x.png in Resources */,
+				C3C213C219C1D9A5006C3A1B /* StatusHighlighted.png in Resources */,
 				C3F5F7B5192388DB00E8AD90 /* MenuIconActive@2x.png in Resources */,
 				C3D52E6B191B981600C387B5 /* MainMenu.xib in Resources */,
 			);
@@ -438,9 +454,9 @@
 				C3D52E68191B981600C387B5 /* AppDelegate.m in Sources */,
 				C396A34619B5FADA002F24EC /* GCDResponse.m in Sources */,
 				C340BE5C191CE71000975377 /* StartAtLoginController.m in Sources */,
-				C396A32B19B47FE4002F24EC /* GCDAsyncUdpSocket.m in Sources */,
 				C3D52E61191B981600C387B5 /* main.m in Sources */,
 				C396A34719B5FADA002F24EC /* GCDRouterRole.m in Sources */,
+				C3C213C619C1E352006C3A1B /* GCDAsyncUdpSocket.m in Sources */,
 				C396A34519B5FADA002F24EC /* GCDRequest.m in Sources */,
 				C396A34A19B5FADA002F24EC /* NSString+QueryString.m in Sources */,
 				C396A34219B5FADA002F24EC /* GCDAsyncSocket.m in Sources */,
