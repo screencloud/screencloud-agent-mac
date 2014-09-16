@@ -324,6 +324,15 @@ withFilterContext:(id)filterContext
     }
 }
 
+- (IBAction)fullscreenAction:(id)sender
+{
+    NSLog(@"take full screen");
+    
+    [_window toggleFullScreen:self];
+    
+    
+}
+
 - (IBAction)showHideAction:(id)sender
 {
     if ([self window].isVisible) {

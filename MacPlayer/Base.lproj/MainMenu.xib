@@ -100,26 +100,12 @@
         </window>
         <menu id="JIH-6q-0pm">
             <items>
-                <menuItem title="Get message from server" id="5eE-Gh-rnp">
+                <menuItem title="Fullscreen (Cmd+Enter)" id="J4e-tx-Lhv">
                     <modifierMask key="keyEquivalentModifierMask"/>
-                    <menu key="submenu" title="Get message from server" id="q7j-U9-A9L">
-                        <items>
-                            <menuItem title="On" id="dPp-6E-d3S">
-                                <modifierMask key="keyEquivalentModifierMask"/>
-                                <connections>
-                                    <action selector="setGetMessageOn:" target="Voe-Tx-rLC" id="hvY-Cn-JtA"/>
-                                </connections>
-                            </menuItem>
-                            <menuItem title="Off" id="crq-Ar-Clx">
-                                <modifierMask key="keyEquivalentModifierMask"/>
-                                <connections>
-                                    <action selector="setGetMessageOff:" target="Voe-Tx-rLC" id="POd-33-9ra"/>
-                                </connections>
-                            </menuItem>
-                        </items>
-                    </menu>
+                    <connections>
+                        <action selector="fullscreenAction:" target="Voe-Tx-rLC" id="5cs-vu-B2d"/>
+                    </connections>
                 </menuItem>
-                <menuItem isSeparatorItem="YES" id="6Wu-EP-h5x"/>
                 <menuItem title="Show / hide Player " id="DPK-u7-m53">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
@@ -143,6 +129,7 @@
                     </connections>
                 </menuItem>
             </items>
+            <point key="canvasLocation" x="89.5" y="819.5"/>
         </menu>
         <menuItem title="Item 3" id="xCr-vf-y0Q">
             <modifierMask key="keyEquivalentModifierMask"/>

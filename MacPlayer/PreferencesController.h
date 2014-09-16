@@ -14,7 +14,9 @@
     StartAtLoginController *loginController;
     __weak NSButtonCell *_autoLaunchButton;
     __weak NSButtonCell *_alwayAwakeButton;
+    __weak NSButtonCell *_visibleLocalNetworkButton;
 }
 @property (weak) IBOutlet NSButtonCell *autoLaunchButton;
 @property (weak) IBOutlet NSButtonCell *alwayAwakeButton;
+@property (weak) IBOutlet NSButtonCell *visibleLocalNetworkButton;
 @end
