@@ -18,7 +18,7 @@
 		C340BF29191CF3BB00975377 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C340BF28191CF3BB00975377 /* AppDelegate.m */; };
 		C340BF2C191CF3BB00975377 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = C340BF2A191CF3BB00975377 /* MainMenu.xib */; };
 		C340BF2E191CF3BC00975377 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C340BF2D191CF3BC00975377 /* Images.xcassets */; };
-		C340BF46191CF48700975377 /* MacPlayerHelper.app in CopyFiles */ = {isa = PBXBuildFile; fileRef = C340BF19191CF3BB00975377 /* MacPlayerHelper.app */; };
+		C340BF46191CF48700975377 /* MacAgentHelper.app in CopyFiles */ = {isa = PBXBuildFile; fileRef = C340BF19191CF3BB00975377 /* MacAgentHelper.app */; };
 		C367C861192362E5004583B5 /* ScreenCloudView.m in Sources */ = {isa = PBXBuildFile; fileRef = C367C860192362E5004583B5 /* ScreenCloudView.m */; };
 		C38894861920C186005021EF /* AwakeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C38894851920C186005021EF /* AwakeManager.m */; };
 		C396A34219B5FADA002F24EC /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = C396A32F19B5FADA002F24EC /* GCDAsyncSocket.m */; };
@@ -60,7 +60,7 @@
 			dstPath = Contents/Library/LoginItems;
 			dstSubfolderSpec = 1;
 			files = (
-				C340BF46191CF48700975377 /* MacPlayerHelper.app in CopyFiles */,
+				C340BF46191CF48700975377 /* MacAgentHelper.app in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -72,12 +72,12 @@
 		C340BE58191CE6F700975377 /* ServiceManagement.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ServiceManagement.framework; path = System/Library/Frameworks/ServiceManagement.framework; sourceTree = SDKROOT; };
 		C340BE5A191CE71000975377 /* StartAtLoginController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartAtLoginController.h; sourceTree = "<group>"; };
 		C340BE5B191CE71000975377 /* StartAtLoginController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartAtLoginController.m; sourceTree = "<group>"; };
-		C340BE5F191CE7C700975377 /* MacPlayer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = MacPlayer.entitlements; sourceTree = "<group>"; };
-		C340BF19191CF3BB00975377 /* MacPlayerHelper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MacPlayerHelper.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		C340BF1D191CF3BB00975377 /* MacPlayerHelper-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MacPlayerHelper-Info.plist"; sourceTree = "<group>"; };
+		C340BE5F191CE7C700975377 /* MacAgent.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = MacAgent.entitlements; sourceTree = "<group>"; };
+		C340BF19191CF3BB00975377 /* MacAgentHelper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MacAgentHelper.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C340BF1D191CF3BB00975377 /* MacAgentHelper-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MacAgentHelper-Info.plist"; sourceTree = "<group>"; };
 		C340BF1F191CF3BB00975377 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		C340BF21191CF3BB00975377 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		C340BF23191CF3BB00975377 /* MacPlayerHelper-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MacPlayerHelper-Prefix.pch"; sourceTree = "<group>"; };
+		C340BF23191CF3BB00975377 /* MacAgentHelper-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MacAgentHelper-Prefix.pch"; sourceTree = "<group>"; };
 		C340BF25191CF3BB00975377 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
 		C340BF27191CF3BB00975377 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		C340BF28191CF3BB00975377 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -114,15 +114,15 @@
 		C3C213BF19C1D9A5006C3A1B /* StatusHighlighted@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "StatusHighlighted@2x.png"; sourceTree = "<group>"; };
 		C3C213C419C1E352006C3A1B /* GCDAsyncUdpSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDAsyncUdpSocket.h; sourceTree = "<group>"; };
 		C3C213C519C1E352006C3A1B /* GCDAsyncUdpSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncUdpSocket.m; sourceTree = "<group>"; };
-		C3D52E51191B981600C387B5 /* MacPlayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MacPlayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C3D52E51191B981600C387B5 /* MacAgent.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MacAgent.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C3D52E54191B981600C387B5 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		C3D52E57191B981600C387B5 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		C3D52E58191B981600C387B5 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		C3D52E59191B981600C387B5 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		C3D52E5C191B981600C387B5 /* MacPlayer-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MacPlayer-Info.plist"; sourceTree = "<group>"; };
+		C3D52E5C191B981600C387B5 /* MacAgent-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MacAgent-Info.plist"; sourceTree = "<group>"; };
 		C3D52E5E191B981600C387B5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		C3D52E60191B981600C387B5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		C3D52E62191B981600C387B5 /* MacPlayer-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MacPlayer-Prefix.pch"; sourceTree = "<group>"; };
+		C3D52E62191B981600C387B5 /* MacAgent-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MacAgent-Prefix.pch"; sourceTree = "<group>"; };
 		C3D52E64191B981600C387B5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
 		C3D52E66191B981600C387B5 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		C3D52E67191B981600C387B5 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -164,7 +164,7 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		C340BF1B191CF3BB00975377 /* MacPlayerHelper */ = {
+		C340BF1B191CF3BB00975377 /* MacAgentHelper */ = {
 			isa = PBXGroup;
 			children = (
 				C340BF27191CF3BB00975377 /* AppDelegate.h */,
@@ -173,16 +173,17 @@
 				C340BF2D191CF3BC00975377 /* Images.xcassets */,
 				C340BF1C191CF3BB00975377 /* Supporting Files */,
 			);
-			path = MacPlayerHelper;
+			name = MacAgentHelper;
+			path = MacAgentHelper;
 			sourceTree = "<group>";
 		};
 		C340BF1C191CF3BB00975377 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				C340BF1D191CF3BB00975377 /* MacPlayerHelper-Info.plist */,
+				C340BF1D191CF3BB00975377 /* MacAgentHelper-Info.plist */,
 				C340BF1E191CF3BB00975377 /* InfoPlist.strings */,
 				C340BF21191CF3BB00975377 /* main.m */,
-				C340BF23191CF3BB00975377 /* MacPlayerHelper-Prefix.pch */,
+				C340BF23191CF3BB00975377 /* MacAgentHelper-Prefix.pch */,
 				C340BF24191CF3BB00975377 /* Credits.rtf */,
 			);
 			name = "Supporting Files";
@@ -235,8 +236,8 @@
 		C3D52E48191B981600C387B5 = {
 			isa = PBXGroup;
 			children = (
-				C3D52E5A191B981600C387B5 /* MacPlayer */,
-				C340BF1B191CF3BB00975377 /* MacPlayerHelper */,
+				C3D52E5A191B981600C387B5 /* MacAgent */,
+				C340BF1B191CF3BB00975377 /* MacAgentHelper */,
 				C3D52E53191B981600C387B5 /* Frameworks */,
 				C3D52E52191B981600C387B5 /* Products */,
 			);
@@ -245,8 +246,8 @@
 		C3D52E52191B981600C387B5 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				C3D52E51191B981600C387B5 /* MacPlayer.app */,
-				C340BF19191CF3BB00975377 /* MacPlayerHelper.app */,
+				C3D52E51191B981600C387B5 /* MacAgent.app */,
+				C340BF19191CF3BB00975377 /* MacAgentHelper.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -275,7 +276,7 @@
 			name = "Other Frameworks";
 			sourceTree = "<group>";
 		};
-		C3D52E5A191B981600C387B5 /* MacPlayer */ = {
+		C3D52E5A191B981600C387B5 /* MacAgent */ = {
 			isa = PBXGroup;
 			children = (
 				C3C213BC19C1D9A5006C3A1B /* Status.png */,
@@ -286,7 +287,7 @@
 				C396A32819B47FE4002F24EC /* GCD */,
 				C338336B192CACC700C3D3DB /* AppIcon.icns */,
 				C338336C192CACC700C3D3DB /* icon1024.png */,
-				C340BE5F191CE7C700975377 /* MacPlayer.entitlements */,
+				C340BE5F191CE7C700975377 /* MacAgent.entitlements */,
 				C3F5F7B2192388DB00E8AD90 /* MenuIcon@2x.png */,
 				C3F5F7B3192388DB00E8AD90 /* MenuIconActive@2x.png */,
 				C340BE5A191CE71000975377 /* StartAtLoginController.h */,
@@ -306,16 +307,17 @@
 				C367C85F192362E5004583B5 /* ScreenCloudView.h */,
 				C367C860192362E5004583B5 /* ScreenCloudView.m */,
 			);
-			path = MacPlayer;
+			name = MacAgent;
+			path = MacAgent;
 			sourceTree = "<group>";
 		};
 		C3D52E5B191B981600C387B5 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				C3D52E5C191B981600C387B5 /* MacPlayer-Info.plist */,
+				C3D52E5C191B981600C387B5 /* MacAgent-Info.plist */,
 				C3D52E5D191B981600C387B5 /* InfoPlist.strings */,
 				C3D52E60191B981600C387B5 /* main.m */,
-				C3D52E62191B981600C387B5 /* MacPlayer-Prefix.pch */,
+				C3D52E62191B981600C387B5 /* MacAgent-Prefix.pch */,
 				C3D52E63191B981600C387B5 /* Credits.rtf */,
 			);
 			name = "Supporting Files";
@@ -324,9 +326,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		C340BF18191CF3BB00975377 /* MacPlayerHelper */ = {
+		C340BF18191CF3BB00975377 /* MacAgentHelper */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = C340BF40191CF3BC00975377 /* Build configuration list for PBXNativeTarget "MacPlayerHelper" */;
+			buildConfigurationList = C340BF40191CF3BC00975377 /* Build configuration list for PBXNativeTarget "MacAgentHelper" */;
 			buildPhases = (
 				C340BF15191CF3BB00975377 /* Sources */,
 				C340BF16191CF3BB00975377 /* Frameworks */,
@@ -336,14 +338,14 @@
 			);
 			dependencies = (
 			);
-			name = MacPlayerHelper;
-			productName = MacPlayerHelper;
-			productReference = C340BF19191CF3BB00975377 /* MacPlayerHelper.app */;
+			name = MacAgentHelper;
+			productName = MacAgentHelper;
+			productReference = C340BF19191CF3BB00975377 /* MacAgentHelper.app */;
 			productType = "com.apple.product-type.application";
 		};
-		C3D52E50191B981600C387B5 /* MacPlayer */ = {
+		C3D52E50191B981600C387B5 /* MacAgent */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = C3D52E82191B981600C387B5 /* Build configuration list for PBXNativeTarget "MacPlayer" */;
+			buildConfigurationList = C3D52E82191B981600C387B5 /* Build configuration list for PBXNativeTarget "MacAgent" */;
 			buildPhases = (
 				C3D52E4D191B981600C387B5 /* Sources */,
 				C3D52E4E191B981600C387B5 /* Frameworks */,
@@ -354,9 +356,9 @@
 			);
 			dependencies = (
 			);
-			name = MacPlayer;
-			productName = MacPlayer;
-			productReference = C3D52E51191B981600C387B5 /* MacPlayer.app */;
+			name = MacAgent;
+			productName = MacAgent;
+			productReference = C3D52E51191B981600C387B5 /* MacAgent.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -365,7 +367,7 @@
 		C3D52E49191B981600C387B5 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0510;
+				LastUpgradeCheck = 0600;
 				ORGANIZATIONNAME = Codegent;
 				TargetAttributes = {
 					C3D52E50191B981600C387B5 = {
@@ -377,7 +379,7 @@
 					};
 				};
 			};
-			buildConfigurationList = C3D52E4C191B981600C387B5 /* Build configuration list for PBXProject "MacPlayer" */;
+			buildConfigurationList = C3D52E4C191B981600C387B5 /* Build configuration list for PBXProject "MacAgent" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -392,8 +394,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				C3D52E50191B981600C387B5 /* MacPlayer */,
-				C340BF18191CF3BB00975377 /* MacPlayerHelper */,
+				C3D52E50191B981600C387B5 /* MacAgent */,
+				C340BF18191CF3BB00975377 /* MacAgentHelper */,
 			);
 		};
 /* End PBXProject section */
@@ -527,13 +529,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "MacPlayerHelper/MacPlayerHelper-Prefix.pch";
+				GCC_PREFIX_HEADER = "MacAgentHelper/MacAgentHelper-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = "MacPlayerHelper/MacPlayerHelper-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				INFOPLIST_FILE = "MacAgentHelper/MacAgentHelper-Info.plist";
+				PRODUCT_NAME = MacAgentHelper;
 				SKIP_INSTALL = YES;
 				WRAPPER_EXTENSION = app;
 			};
@@ -545,9 +547,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "MacPlayerHelper/MacPlayerHelper-Prefix.pch";
-				INFOPLIST_FILE = "MacPlayerHelper/MacPlayerHelper-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				GCC_PREFIX_HEADER = "MacAgentHelper/MacAgentHelper-Prefix.pch";
+				INFOPLIST_FILE = "MacAgentHelper/MacAgentHelper-Info.plist";
+				PRODUCT_NAME = MacAgentHelper;
 				SKIP_INSTALL = YES;
 				WRAPPER_EXTENSION = app;
 			};
@@ -626,14 +628,13 @@
 		C3D52E83191B981600C387B5 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD)";
-				CODE_SIGN_ENTITLEMENTS = MacPlayer/MacPlayer.entitlements;
+				CODE_SIGN_ENTITLEMENTS = MacAgent/MacAgent.entitlements;
 				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "MacPlayer/MacPlayer-Prefix.pch";
-				INFOPLIST_FILE = "MacPlayer/MacPlayer-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				GCC_PREFIX_HEADER = "MacAgent/MacAgent-Prefix.pch";
+				INFOPLIST_FILE = "MacAgent/MacAgent-Info.plist";
+				PRODUCT_NAME = MacAgent;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -641,14 +642,13 @@
 		C3D52E84191B981600C387B5 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD)";
-				CODE_SIGN_ENTITLEMENTS = MacPlayer/MacPlayer.entitlements;
+				CODE_SIGN_ENTITLEMENTS = MacAgent/MacAgent.entitlements;
 				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "MacPlayer/MacPlayer-Prefix.pch";
-				INFOPLIST_FILE = "MacPlayer/MacPlayer-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				GCC_PREFIX_HEADER = "MacAgent/MacAgent-Prefix.pch";
+				INFOPLIST_FILE = "MacAgent/MacAgent-Info.plist";
+				PRODUCT_NAME = MacAgent;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -656,7 +656,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		C340BF40191CF3BC00975377 /* Build configuration list for PBXNativeTarget "MacPlayerHelper" */ = {
+		C340BF40191CF3BC00975377 /* Build configuration list for PBXNativeTarget "MacAgentHelper" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C340BF41191CF3BC00975377 /* Debug */,
@@ -665,7 +665,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		C3D52E4C191B981600C387B5 /* Build configuration list for PBXProject "MacPlayer" */ = {
+		C3D52E4C191B981600C387B5 /* Build configuration list for PBXProject "MacAgent" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C3D52E80191B981600C387B5 /* Debug */,
@@ -674,7 +674,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		C3D52E82191B981600C387B5 /* Build configuration list for PBXNativeTarget "MacPlayer" */ = {
+		C3D52E82191B981600C387B5 /* Build configuration list for PBXNativeTarget "MacAgent" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C3D52E83191B981600C387B5 /* Debug */,
