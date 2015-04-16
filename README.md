@@ -1,2 +1,0 @@
-screencloud-mac-agent
-=====================
