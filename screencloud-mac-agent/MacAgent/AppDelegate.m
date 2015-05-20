@@ -417,6 +417,8 @@ withFilterContext:(id)filterContext
     
     appInfo = [NSString stringWithFormat:appInfo, @"", @"", @"", @"", @""];
     
+    NSLog(@"appInfo = %@", appInfo);
+    
     GCDResponse * response = [request responseWithStatus:200 message:appInfo];
     response.headers[@"Access-Control-Allow-Method"] = @"GET, POST, DELETE, OPTIONS";
     response.headers[@"Access-Control-Expose-Headers"] = @"Location";
@@ -485,6 +487,7 @@ withFilterContext:(id)filterContext
     response.headers[@"Application-URL"] = [NSString stringWithFormat:@"http://%@:9009/apps/", [self getIPWithNSHost]];
     
 //    NSLog(@"response = %@", response);
+    NSLog(@"deviceDesc = %@", deviceDesc);
     
     return response;
 }
