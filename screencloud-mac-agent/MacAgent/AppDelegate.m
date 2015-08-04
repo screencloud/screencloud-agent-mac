@@ -24,6 +24,8 @@
     
     BOOL isInternetWentDown;
     JSBridge *jsBridge;
+    
+    NSString *deviceIpAddress;
 }
 
 #define kShowIcon @"showIcon"
@@ -42,6 +44,9 @@
     isInternetWentDown = NO;
     
     NSString *lastOpenURL = [[NSUserDefaults standardUserDefaults] stringForKey:kLastOpenUrl];
+    
+    // HACK force to blank to load defualt url for test
+    lastOpenURL = @"";
     
     if( [lastOpenURL isEqualToString:@""] || lastOpenURL == (id)[NSNull null] || !lastOpenURL || lastOpenURL == nil ){
         lastOpenURL = kScreenCloudUrl;
@@ -64,9 +69,8 @@
     id win = [self.screenView windowScriptObject];
     [win setValue:jsBridge forKey:@"ScreenCloudRemote"];
     
-    [_playerWindow toggleFullScreen:self];
+//    [_playerWindow toggleFullScreen:self];
     [_playerWindow makeFirstResponder: self.screenView];
-//    [self.screenView enterFullScreenMode:[NSScreen mainScreen] withOptions:nil];
     [self.screenView setFrameLoadDelegate:self];
     
     
@@ -124,7 +128,7 @@
 
 - (void)awakeFromNib
 {
-    
+    deviceIpAddress = @"";
 	statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength: 24.0];
 	statusView = [[StatusItemView alloc] initWithStatusItem: statusItem];
 	[statusView setMenu: self.statusMenu];
@@ -155,9 +159,9 @@
         
     }
     
-//    if ([[NSUserDefaults standardUserDefaults] boolForKey:kShowIcon] == 0) {
-//        [statusView setHidden:YES];
-//    }
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:kShowIcon] == 0) {
+        [statusView setHidden:YES];
+    }
 }
 
 - (void)dealloc
@@ -178,7 +182,7 @@
     [self sendNotifyAlive];
     [self performSelector:@selector(sendNotifyAlive) withObject:nil afterDelay:0.1];
     [self performSelector:@selector(sendNotifyAlive) withObject:nil afterDelay:0.2];
-    
+//
     /*
      Devices SHOULD wait a random interval (e.g. between 0 and 100milliseconds) before sending an initial set of advertisements in order to reduce the likelihood of network storms; this random interval SHOULD also be applied on occasions where the device obtains a new IP address or a new UPnP-enabled interface is installed.
      Due to the unreliable nature of UDP, devices SHOULD send the entire set of discovery messages more than once with some delay between sets e.g. a few hundred milliseconds. To avoid network congestion discovery messages SHOULD NOT be sent more than three times.
@@ -201,16 +205,20 @@
         NSLog(@"Error binding to port: %@", error);
         return;
     }
+    NSLog(@"Binded to port 1900");
+    
     if(![udpSocket joinMulticastGroup:@"239.255.255.250" error:&error]){
         NSLog(@"Error connecting to multicast group: %@", error);
         return;
     }
+    NSLog(@"Joined MulticastGroup");
+    
     if (![udpSocket beginReceiving:&error])
     {
         NSLog(@"Error receiving: %@", error);
         return;
     }
-    
+    NSLog(@"beginReceiving !!");
     NSLog(@"Socket Ready");
 }
 
@@ -224,6 +232,7 @@
       fromAddress:(NSData *)address
 withFilterContext:(id)filterContext
 {
+    
     NSString *msg = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     
 //    NSString *addressMsg = [[NSString alloc] initWithData:address encoding:<#(NSStringEncoding)#>];
@@ -232,6 +241,8 @@ withFilterContext:(id)filterContext
     
     if (msg)
     {
+//        NSLog(@"\n\n\nmsg = \n%@\n---------------", msg);
+        
         if (!([msg rangeOfString:@"M-SEARCH * HTTP/1.1"].location == NSNotFound)) {
             NSString *responsePayload = @"HTTP/1.1 200 OK\n" \
             "ST: urn:dial-multiscreen-org:service:dial:1\n" \
@@ -249,10 +260,11 @@ withFilterContext:(id)filterContext
                                                                    [self getIPWithNSHost],
                                                                     bootID,
                                                                    [self UUID]];
+                
                 NSData *d = [responsePayload dataUsingEncoding:NSUTF8StringEncoding];
                 
 //                NSLog(@"responsePayload = %@", responsePayload);
-//                NSLog(@"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
+                NSLog(@"xxx M-SEARCH response xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
                 
                 [udpSocket sendData:d toAddress:address withTimeout:-1 tag:0];
                 
@@ -285,7 +297,7 @@ withFilterContext:(id)filterContext
     responsePayload = [NSString stringWithFormat:responsePayload, [self getIPWithNSHost], [self UUID], bootID];
     NSData *data = [responsePayload dataUsingEncoding:NSUTF8StringEncoding];
     
-    NSLog(@"Send NotifyAlive responsePayload = %@", responsePayload);
+//    NSLog(@"Send NotifyAlive responsePayload = %@", responsePayload);
     
     [udpSocket sendData:data toHost:@"239.255.255.250" port:1900 withTimeout:-1 tag:1];
     
@@ -305,7 +317,7 @@ withFilterContext:(id)filterContext
     
     responsePayload = [NSString stringWithFormat:responsePayload, [self UUID], bootID];
     NSData *data = [responsePayload dataUsingEncoding:NSUTF8StringEncoding];
-    NSLog(@"sendByebye responsePayload = %@", responsePayload);
+//    NSLog(@"sendByebye responsePayload = %@", responsePayload);
     
     [udpSocket sendData:data toHost:@"239.255.255.250" port:1900 withTimeout:-1 tag:1];
     
@@ -314,18 +326,23 @@ withFilterContext:(id)filterContext
 
 
 -(NSString *)getIPWithNSHost{
-    NSArray *addresses = [[NSHost currentHost] addresses];
-    NSString *stringAddress;
-    for (NSString *anAddress in addresses) {
-        if (![anAddress hasPrefix:@"127"] && [[anAddress componentsSeparatedByString:@"."] count] == 4) {
-            stringAddress = anAddress;
-            break;
-        } else {
-            // stringAddress = @"IPv4 address not available" ;
-            stringAddress = @"127.0.0.1";
+    if( ![deviceIpAddress isEqualToString:@""] ){
+        return deviceIpAddress;
+    }else{
+        NSArray *addresses = [[NSHost currentHost] addresses];
+        NSString *stringAddress;
+        for (NSString *anAddress in addresses) {
+            if (![anAddress hasPrefix:@"127"] && [[anAddress componentsSeparatedByString:@"."] count] == 4) {
+                stringAddress = anAddress;
+                break;
+            } else {
+                // stringAddress = @"IPv4 address not available" ;
+                stringAddress = @"127.0.0.1";
+            }
         }
+        deviceIpAddress = stringAddress;
+        return stringAddress;
     }
-    return stringAddress;
 }
 
 - (void)startWebServer
@@ -469,9 +486,6 @@ withFilterContext:(id)filterContext
     
     NSLog(@" computerName = %@", computerName);
     
-//    computerName = @"Jirasaks MacBook ProO";
-    
-    
     deviceDesc = [deviceDesc stringByReplacingOccurrencesOfString:@"#friendlyname#" withString:[self escapeHtml:computerName] ];
     deviceDesc = [deviceDesc stringByReplacingOccurrencesOfString:@"#manufacturer#" withString:@"ScreenCloud Mac, Apple inc."];
     deviceDesc = [deviceDesc stringByReplacingOccurrencesOfString:@"#modelName#" withString:@"Retina"];
@@ -503,6 +517,7 @@ withFilterContext:(id)filterContext
 }
                   
 - (NSString *)UUID {
+    return @"234567890-";
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     NSString *uuid;
     if ([userDefaults valueForKey:kUUID]){
@@ -646,43 +661,6 @@ withFilterContext:(id)filterContext
     }
 }
 
-//- (void)loopCheckInternet
-//{
-//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 5 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-//        NSLog(@"----boooooo loopCheckInternet boooooo -------------------------------");
-//        [self isInternetAvailable];
-//    });
-//}
-//
-//-(BOOL)isInternetAvailable
-//{
-//    NSLog(@"--- isInternetAvailable ---");
-////    [self loopCheckInternet];
-//    bool success = false;
-//    const char *host_name = [@"screencloud.io"
-//                             cStringUsingEncoding:NSASCIIStringEncoding];
-//    
-//    SCNetworkReachabilityRef reachability = SCNetworkReachabilityCreateWithName(NULL,
-//                                                                                host_name);
-//    SCNetworkReachabilityFlags flags;
-//    success = SCNetworkReachabilityGetFlags(reachability, &flags);
-//    bool isAvailable = success && (flags & kSCNetworkFlagsReachable) &&
-//    !(flags & kSCNetworkFlagsConnectionRequired);
-//    if (isAvailable) {
-//        NSLog(@"Host is reachable: %d", flags);
-//        
-//        if(isInternetWentDown){
-//            // reload the webview
-//            isInternetWentDown = NO;
-//            self.screenView.mainFrameURL = self.screenView.mainFrameURL;
-//        }
-//        return YES;
-//    }else{
-//        NSLog(@"Host is unreachable X X X");
-//        isInternetWentDown = YES;
-//        return NO;
-//    }
-//}
 
 - (void)reachabilityChanged:(NSNotification *)notify
 {

@@ -7,14 +7,14 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>88C53069-73B4-4563-B1D8-093B738EC09F</string>
 	<key>IDESourceControlProjectName</key>
-	<string>MacAgent</string>
+	<string>project</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>B4B9F0C08B5A798FA21094B1075BFE11DA13AA5E</key>
 		<string>github.com:screencloud/screencloud-agent-mac.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>screencloud-mac-agent/MacAgent.xcodeproj</string>
+	<string>screencloud-mac-agent/MacAgent.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>B4B9F0C08B5A798FA21094B1075BFE11DA13AA5E</key>
